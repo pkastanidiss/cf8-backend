@@ -30,3 +30,13 @@ export const update = async(req: Request, res: Response, next:NextFunction) => {
     res.status(401).json({"Error": err});
   }
 }
+
+export const remove = async(req: Request, res: Response, next:NextFunction) => {
+  try {
+    console.log(">>", req.body);
+    const result = await roleService.deleteRole(req.params.id!);
+    res.status(200).json(result);
+  } catch (err) {
+    res.status(401).json({"Error": err});
+  }
+}
