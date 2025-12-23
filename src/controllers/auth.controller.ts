@@ -8,7 +8,7 @@ export const login = async(req: Request, res: Response, next: NextFunction) => {
     if (!result) {
       return res.status(401).json({message:"Invalid Credentials"});
     }
-    res.status(200).json({});
+    res.status(200).json({token: result.token, user: result.user});
   } catch (err) {
     res.status(401).json({message:"Problem in login", error: err});
   }

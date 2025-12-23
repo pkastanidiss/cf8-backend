@@ -7,7 +7,7 @@ import roleRoutes from './routes/role.routes';
 import authRoutes from './routes/auth.routes';
 
 const app = express();
-app.get('/ping', (req, res) => {
+app.get('/ping', (req  , res) => {
   res.send('pong');
 });
 

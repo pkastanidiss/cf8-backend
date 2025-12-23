@@ -16,7 +16,8 @@ export const getOne = async(req: Request, res: Response, next: NextFunction) => 
   try{
     const result = await userService.findUserById(req.params.id!);
     if (!result)
-      return res.status(404).json({message: "User not found"})
+      return res.status(404).json({message: "User not found"});
+    res.status(200).json(result);
   } catch (err) {
     next(err);
   }
