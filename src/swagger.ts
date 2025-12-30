@@ -13,18 +13,18 @@ const options: swaggerJSDoc.Options = {
       version: "1.0.0",
       description: "API for Users written in Typescript"
     },
-    server: [
+    servers: [
       {
-        url: "http:localhost:4000/api",
+        url: "http://localhost:4000/api",
         description: "Local Server"
       } 
     ],
     components: {
-      securitySchemas: {
+      securitySchemes: {
         bearerAuth: {
           type: "http",
-          schema: "bearer",
-          bearerformat: "JWT"
+          scheme: "bearer",
+          bearerFormat: "JWT"
         }
       },
       "schemas": {
@@ -34,7 +34,7 @@ const options: swaggerJSDoc.Options = {
     },
     security: [{bearerAuth:[]}]
   },
-  apis: ['.src/routes/*.ts']
+  apis: ['./src/routes/*.ts']
 };
 
 export const swaggerSpec = swaggerJSDoc(options);
