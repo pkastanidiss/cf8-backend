@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import { describe } from "node:test";
+import { token } from "morgan";
 
 dotenv.config();
 
@@ -43,3 +44,11 @@ describe('User API Tests', () => {
   });
 })
 
+  test('POST /user -> creates new user', async() => {
+    const res = await server.request.post('/users')
+      .set('Authorization', `Bearer ${token}`)
+      .send({username: "newuser", password: "123456"});
+
+    expect(res.status).toBe(201);
+    expect(res.body.username).toBe('newuser');
+  })
