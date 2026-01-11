@@ -21,7 +21,16 @@ export const createUserSchema = z.object({
   email: z.string().email().optional(),
   address: addressSchema.optional(),
   phone: z.array(phoneSchema).optional(),
-  roles: z.array(z.string()).optional()
+  roles: z.never().optional()
 });
 
-export const updateUserSchema = createUserSchema.partial();
+export const updateUserSchema = z.object({
+  firstname: z.string().optional(),
+  lastname: z.string().optional(),
+  email: z.string().email().optional(),
+  address: addressSchema.optional(),
+  phone: z.array(phoneSchema).optional(),
+  username: z.never().optional(),
+  password: z.never().optional(),
+  roles: z.never().optional()
+});

@@ -5,6 +5,7 @@ import morgan from "morgan";
 import userRoutes from './routes/user.routes';
 import roleRoutes from './routes/role.routes';
 import authRoutes from './routes/auth.routes';
+import noteRoutes from './routes/note.routes';
 
 import {setupSwagger} from './swagger';
 
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use('/api/users', userRoutes);
 app.use('/api/roles', roleRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/notes', noteRoutes);
 
 setupSwagger(app);
 

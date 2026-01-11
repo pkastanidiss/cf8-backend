@@ -6,6 +6,7 @@ import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import { describe } from "node:test";
 import { ObjectId } from "mongoose";
+import Role from '../models/role.model';
 
 dotenv.config();
 
@@ -18,22 +19,32 @@ describe('User API Tests GET Requests', () => {
   let token:string;
 
   beforeAll(async () => {
-    await server.start();
-    const hash = await bcrypt.hash('admin1234', 10);
-    const user = await User.create({
-      username:"admin",
-      password: hash,
-      firstname: "testUser",
-      lastname: "testUser",
-      email: "testUser@aueb.gr",
-    });
-    const payload = {
-      username: user.username,
-      email: user.email,
-      roles: user.roles
-    };
-    token = jwt.sign(payload, JWT_SECRET, {expiresIn: '1h'});
+  await server.start();
+
+  const hash = await bcrypt.hash('admin1234', 10);
+
+  let adminRole = await Role.findOne({ role: 'ADMIN' });
+  if (!adminRole) {
+    adminRole = await Role.create({ role: 'ADMIN', active: true });
+  }
+
+  const user = await User.create({
+    username: "admin",
+    password: hash,
+    firstname: "testUser",
+    lastname: "testUser",
+    email: "testUser@aueb.gr",
+    roles: [adminRole._id] 
   });
+
+  const payload = {
+    id: user._id.toString(),
+    username: user.username,
+    roles: [{ role: adminRole.role, active: adminRole.active }] 
+  };
+  token = jwt.sign(payload, JWT_SECRET, { expiresIn: '1h' });
+});
+
 
   afterAll(async() => { await server.stop();});
 

@@ -17,7 +17,6 @@ export const create = async(req:Request, res:Response, next:NextFunction) => {
     res.status(201).json(result);
   } catch(err) {
     res.status(401).json({"Error": err});
-    // next(err)
   }
 }
 
