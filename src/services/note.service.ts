@@ -5,7 +5,7 @@ export const findAllNotes = async () => {
 }
 
 export const createNote = async (payload: Partial<INote>, authorId: string) => {
-  const note = new Note({payload, author: authorId,});
+  const note = new Note({ ...payload, author: authorId });
   return note.save();
 }
 
