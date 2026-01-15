@@ -52,7 +52,7 @@ router.get('/:id', validateObjectId('id'), userCtrl.getOne);
  *      201: 
  *        description: User created
  */
-router.post("/",  userCtrl.create);
+router.post("/", authenticate, validate(createUserSchema), userCtrl.create);
 router.put('/:id', authenticate, validate(updateUserSchema), validateObjectId('id'), userCtrl.update);
 router.delete('/:id', authenticate, validateObjectId('id'), userCtrl.remove);
 
