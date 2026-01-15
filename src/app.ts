@@ -1,5 +1,6 @@
 import express from "express";
 import morgan from "morgan";
+import cors from 'cors';
 
 
 import userRoutes from './routes/user.routes';
@@ -13,6 +14,10 @@ const app = express();
 
 app.use(morgan('dev'));
 app.use(express.json());
+
+app.use(cors({
+  origin: ['http://localhost:4200']
+}))
 
 app.use('/api/users', userRoutes);
 app.use('/api/roles', roleRoutes);
