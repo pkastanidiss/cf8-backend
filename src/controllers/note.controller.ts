@@ -10,30 +10,41 @@ export const list = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export const create = async (req: Request, res: Response) => {
+export const getById = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    console.log("Request Body:", req.body); // Θα δούμε τι στέλνει η Angular
-    console.log("User from Token:", req.user); // Θα δούμε αν το middleware δουλεύει
+    const result = await noteService.findNoteById(req.params.id!);
+    if (!result) return res.status(404).json({ message: "Note not found" });
+    res.status(200).json(result);
+  } catch (err) {
+    next(err);
+  }
+};
 
-    
-  const authorId = req.user?._id || req.user?.id;
+export const create = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const authorId = req.user?._id || req.user?.id;
 
     if (!authorId) {
-      console.log("Error: No authorId found in request");
       return res.status(401).json({ message: "User not authenticated" });
     }
 
+    // Στέλνουμε το body και το authorId στο service
     const note = await noteService.createNote(req.body, authorId);
     res.status(201).json(note);
-  } catch (error: any) {
-    console.error("DETAILED ERROR IN CONTROLLER:", error); // ΑΥΤΟ ΘΑ ΜΑΣ ΠΕΙ ΤΗΝ ΑΛΗΘΕΙΑ
-    res.status(500).json({ message: error.message });
+  } catch (err) {
+    next(err); // Χρησιμοποιούμε το next για ομοιομορφία
   }
 };
 
 export const update = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const userId = req.user.id;
+    const userId = req.user?._id || req.user?.id;
+
+    if (!userId) {
+      return res.status(401).json({ message: "User not identified" });
+    }
+
+    // Το service πρέπει να ελέγχει αν ο userId είναι ο ιδιοκτήτης της σημείωσης
     const result = await noteService.updateNote(req.params.id!, req.body, userId);
     res.status(200).json(result);
   } catch (err) {
@@ -43,7 +54,10 @@ export const update = async (req: Request, res: Response, next: NextFunction) =>
 
 export const remove = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const userId = req.user.id;
+    const userId = req.user?._id || req.user?.id;
+    
+    if (!userId) return res.status(401).json({ message: "Unauthorized" });
+
     const result = await noteService.deleteNote(req.params.id!, userId);
     res.status(200).json(result);
   } catch (err) {
