@@ -7,7 +7,6 @@ export const findAllNotes = async () => {
 };
 
 export const findNoteById = async (id: string) => {
-  // Προσθέτουμε populate για να έχουμε τα στοιχεία του δημιουργού αν χρειαστεί
   return Note.findById(id).populate("author", "username email").lean();
 };
 
@@ -39,13 +38,12 @@ export const createNote = async (payload: Partial<INote>, authorId: string) => {
 };
 
 export const updateNote = async (id: string, noteData: any, userId: string) => {
-  // ΑΦΑΙΡΟΥΜΕ τα πεδία που δεν πρέπει να πειραχτούν στη βάση
   const { _id, author, createdAt, ...cleanData } = noteData;
 
   const updatedNote = await Note.findOneAndUpdate(
     { _id: id, author: userId }, 
-    { $set: cleanData }, // Χρησιμοποιούμε τα καθαρά δεδομένα
-    { new: true, runValidators: true } // runValidators: τρέχει τους κανόνες του Schema
+    { $set: cleanData }, 
+    { new: true, runValidators: true } 
   ).populate("author", "username email");
 
   if (!updatedNote) {
