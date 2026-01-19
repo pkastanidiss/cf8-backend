@@ -21,7 +21,7 @@ export const createUser = async(payload: Partial<IUser>) => {
   }
 
 
-  // let roleIds: Types.ObjectId[] = [];
+
   let student = await Role.findOne({role: "STUDENT"});
   if (!student) {
     student= await Role.create({role: "STUDENT", description: "Role Student", active: true});

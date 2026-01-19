@@ -30,7 +30,7 @@ const PhoneSchema = new Schema<IPhone>({
   type: String,
   number: String
 })
-//  {+id:false};     inserts id or not
+
 
 const AddressSchema = new Schema<IAddress>({
   area: String,

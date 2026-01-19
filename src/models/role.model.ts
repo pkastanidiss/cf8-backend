@@ -2,7 +2,7 @@ import {Schema, model, Document} from "mongoose";
 
 export interface IRole extends Document{
   role: string;
-  description?: string;     // μπορεί και να μην έχει τιμή
+  description?: string;     
   active: boolean;
 }
 

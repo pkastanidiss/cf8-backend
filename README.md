@@ -1,24 +1,60 @@
 # Student Notes Platform - Backend API
 
-Αυτό είναι το Backend μέρος της εφαρμογής ανταλλαγής σημειώσεων. Πρόκειται για ένα RESTful API χτισμένο με Node.js που διαχειρίζεται την αποθήκευση των σημειώσεων, την αυθεντικοποίηση των χρηστών και την επικοινωνία με τη βάση δεδομένων.
-
----
+Αυτό είναι το Backend μέρος της εφαρμογής **Student Notes Platform**. Πρόκειται για ένα RESTful API χτισμένο με **Node.js** και **Express**, το οποίο διαχειρίζεται την αυθεντικοποίηση χρηστών, τη διαχείριση ρόλων και την αποθήκευση σημειώσεων, με χρήση **MongoDB** και **Mongoose**.
 
 ## Τεχνολογίες (Tech Stack)
 
-* **Runtime Environment:** [Node.js](https://nodejs.org/)
-* **Web Framework:** [Express.js](https://expressjs.com/)
-* **Database:** [MongoDB](https://www.mongodb.com/) (μέσω Mongoose ODM)
-* **Security:** * [JSON Web Tokens (JWT)](https://jwt.io/) για ασφαλή πρόσβαση.
-    * [Bcrypt](https://www.npmjs.com/package/bcrypt) για κρυπτογράφηση κωδικών πρόσβασης.
-* **Middleware:** [CORS](https://www.npmjs.com/package/cors) για σύνδεση με το Angular Frontend.
+- **Runtime Environment:** [Node.js](https://nodejs.org/)  
+- **Web Framework:** [Express.js](https://expressjs.com/)  
+- **Language:** Typescript  
+- **Database:** [MongoDB](https://www.mongodb.com/) μέσω Mongoose ODM  
+- **Authentication & Security:** JWT Bearer Tokens, bcrypt για κρυπτογράφηση κωδικών  
+- **API Documentation:** Swagger / OpenAPI 3.0 με swagger-jsdoc, swagger-ui-express και mongoose-to-swagger  
+- **Middleware:** CORS, Custom validation & authentication middlewares  
+- **Testing:** Jest και Supertest  
 
----
+## API Documentation (Swagger)
+
+Το Backend API παρέχει πλήρη τεκμηρίωση μέσω Swagger (OpenAPI 3.0). 
+Η τεκμηρίωση παράγεται αυτόματα από JSDoc `@openapi` σχόλια στα route αρχεία και από τα Mongoose models μέσω του `mongoose-to-swagger`. 
+
+Με τον server σε λειτουργία, το Swagger UI είναι διαθέσιμο στο:
+
+http://localhost:4000/api/docs
+
+
+Το API χρησιμοποιεί Bearer JWT authentication. 
+Για να καλέσετε protected endpoints μέσω Swagger:
+
+1. Κάντε login στο `POST /auth/login`.
+2. Αντιγράψτε το `accessToken`.
+3. Πατήστε **Authorize** στο Swagger UI.
+4. Εισάγετε `Bearer <accessToken>`.
+
+Μετά από αυτό, έχετε πρόσβαση σε όλα τα protected endpoints.
 
 ## Εγκατάσταση και Εκκίνηση (Setup)
 
-Ακολουθήστε αυτά τα βήματα για να τρέξετε τον server τοπικά:
-
-1. **Εγκατάσταση των απαραίτητων πακέτων:**
+1. Κλωνοποίηση του repository  
    ```bash
-   npm install
+   git clone <repo-url>
+   cd cf8-backend
+
+2. Εγκατάσταση εξαρτήσεων  
+    npm install
+
+3. Ρύθμιση environment variables
+Δημιουργήστε αρχείο .env με τις εξής ρυθμίσεις:
+    MONGO_URI = mongodb+srv://cfuser:CodingFa@cluster0.rbmgdmz.mongodb.net/codingfactory?retryWrites=true&w=majority
+    PORT = 4000
+    JWT_SECRET = '2b0c06be858fbb3a2a5a2a66c62cb1ec70d4d74dee2e338376634d9868a625ab'
+
+4. Εκκίνηση server (development)
+    npm run dev
+
+5. Εκκίνηση server (development)
+    npm run build
+    npm start
+
+
+
