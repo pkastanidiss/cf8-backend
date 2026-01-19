@@ -45,9 +45,6 @@ http://localhost:4000/api/docs
 
 3. Ρύθμιση environment variables
 Δημιουργήστε αρχείο .env με τις εξής ρυθμίσεις:
-    MONGO_URI = mongodb+srv://cfuser:CodingFa@cluster0.rbmgdmz.mongodb.net/codingfactory?retryWrites=true&w=majority
-    PORT = 4000
-    JWT_SECRET = '2b0c06be858fbb3a2a5a2a66c62cb1ec70d4d74dee2e338376634d9868a625ab'
 
 4. Εκκίνηση server (development)
     npm run dev
