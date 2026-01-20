@@ -41,7 +41,7 @@ http://localhost:4000/api/docs
     npm install
 
 3. Ρύθμιση environment variables
-Δημιουργήστε αρχείο .env με τις εξής ρυθμίσεις:
+    Δημιουργήστε αρχείο .env 
 
 4. Εκκίνηση server (development)
     npm run dev
