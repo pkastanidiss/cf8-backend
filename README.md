@@ -36,9 +36,6 @@ http://localhost:4000/api/docs
 ## Εγκατάσταση και Εκκίνηση (Setup)
 
 1. Κλωνοποίηση του repository  
-   ```bash
-   git clone <repo-url>
-   cd cf8-backend
 
 2. Εγκατάσταση εξαρτήσεων  
     npm install
