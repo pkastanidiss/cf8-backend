@@ -78,7 +78,7 @@ router.get('/:id', validateObjectId('id'), userCtrl.getOne);
  *      201: 
  *        description: User created
  */
-router.post("/", authenticate, validate(createUserSchema), userCtrl.create);
+router.post("/", validate(createUserSchema), userCtrl.create);
 
 /**
  * @openapi
