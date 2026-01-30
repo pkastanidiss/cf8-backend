@@ -23,6 +23,11 @@ export const getOne = async(req: Request, res: Response, next: NextFunction) => 
 
 export const create = async(req: Request, res:Response, next: NextFunction) => {
   try {
+    const existingUser = await userService.findUserByEmail(req.body.email);
+    if (existingUser) {
+      return res.status(409).json({ message: "Email already exists" });
+    }
+    
     const result = await userService.createUser(req.body);
     res.status(201).json(result);
   } catch (err) {

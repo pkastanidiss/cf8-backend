@@ -32,6 +32,10 @@ export const createUser = async(payload: Partial<IUser>) => {
   return user.save();
 }
 
+export const findUserByEmail = async (email: string) => {
+  return await User.findOne({ email });
+}
+
 export const updateUser = async(id: string, payload: Partial<IUser>) => {
   if (payload.password) {
     const hash = await bcrypt.hash(payload.password, SALT_ROUNDS);

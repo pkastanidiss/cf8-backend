@@ -14,7 +14,14 @@ export interface IUser extends Document {
   password: string;
   firstname?: string;
   lastname?: string;
-  email?: string;
+  email: {
+    type: String,
+    required: true,
+    unique: true,   
+    index: true,
+    lowercase: true, 
+    trim: true     
+  },
   address?: {
     area?: string;
     street?: string;
