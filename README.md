@@ -33,22 +33,10 @@ http://localhost:4000/api/docs
 
 Μετά από αυτό, έχετε πρόσβαση σε όλα τα protected endpoints.
 
-## Εγκατάσταση και Εκκίνηση (Setup)
-
-1. Κλωνοποίηση του repository  
-
-2. Εγκατάσταση εξαρτήσεων  
-    npm install
-
-3. Ρύθμιση environment variables
-    Δημιουργήστε αρχείο .env 
-
-4. Εκκίνηση server (development)
-    npm run dev
-
-5. Εκκίνηση server (development)
-    npm run build
-    npm start
+## Εγκατάσταση & Εκτέλεση
+1. `npm install`
+2. Δημιουργήστε ένα αρχείο `.env` με το `MONGODB_URI`, το `PORT` και το `JWT_SECRET`.
+3. `npm start` (τρέχει στο `http://localhost:4000`)
 
 
 
