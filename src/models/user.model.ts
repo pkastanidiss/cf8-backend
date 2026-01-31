@@ -14,14 +14,7 @@ export interface IUser extends Document {
   password: string;
   firstname?: string;
   lastname?: string;
-  email: {
-    type: String,
-    required: true,
-    unique: true,   
-    index: true,
-    lowercase: true, 
-    trim: true     
-  },
+  email: string;
   address?: {
     area?: string;
     street?: string;
@@ -59,7 +52,13 @@ const UserSchema = new Schema<IUser> ({
   password: {type:String, required: true},
   firstname: {type: String},
   lastname: {type: String},
-  email: {type:String, index: true},
+  email: {
+    type:String,
+    index: true,
+    unique: true,
+    lowercase: true, 
+    trim: true
+  },
   address: AddressSchema,
   phone: {type: [PhoneSchema], null: true},
   roles: [{type:Schema.Types.ObjectId, ref:"Role", required: true}]
